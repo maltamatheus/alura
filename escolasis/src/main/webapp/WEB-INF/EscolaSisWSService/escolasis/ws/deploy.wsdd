@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from EscolaSisWSService WSDL service -->
+
+  <service name="EscolaSisWS" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://ws.escolasis"/>
+      <parameter name="wsdlServiceElement" value="EscolaSisWSService"/>
+      <parameter name="schemaQualified" value="http://modelo.escolasis,http://xml.modelo.escolasis,http://fault.exceptions.escolasis,http://exceptions.escolasis,http://xml.apache.org/xml-soap,http://ws.escolasis"/>
+      <parameter name="wsdlServicePort" value="EscolaSisWS"/>
+      <parameter name="className" value="escolasis.ws.EscolaSisWS"/>
+      <parameter name="wsdlPortType" value="EscolaSisWS"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://ws.escolasis" xmlns:retNS="http://ws.escolasis" xmlns:rtns="http://xml.modelo.escolasis" name="getPessoas" qname="operNS:getPessoas" returnQName="retNS:getPessoasReturn" returnType="rtns:ListaPessoa" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://ws.escolasis" xmlns:retNS="http://ws.escolasis" xmlns:rtns="http://xml.modelo.escolasis" name="salvar" qname="operNS:salvar" returnQName="retNS:salvarReturn" returnType="rtns:ListaPessoaInsert" soapAction="">
+        <parameter xmlns:pns="http://ws.escolasis" xmlns:tns="http://modelo.escolasis" qname="pns:token" type="tns:TokenUsuario"/>
+        <parameter xmlns:pns="http://ws.escolasis" xmlns:tns="http://xml.modelo.escolasis" qname="pns:pessoas" type="tns:ListaPessoaInsert"/>
+        <fault xmlns:fns="http://ws.escolasis" xmlns:tns="http://exceptions.escolasis" name="AutenticacaoException" qname="fns:fault" class="escolasis.exceptions.AutenticacaoException" type="tns:AutenticacaoException"/>
+      </operation>
+      <operation xmlns:operNS="http://ws.escolasis" xmlns:retNS="http://ws.escolasis" xmlns:rtns="http://modelo.escolasis" name="getPapelPessoa" qname="operNS:getPapelPessoa" returnQName="retNS:getPapelPessoaReturn" returnType="rtns:PapelPessoa" soapAction="">
+        <parameter xmlns:pns="http://ws.escolasis" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idPapelPessoa" type="tns:long"/>
+      </operation>
+      <operation xmlns:operNS="http://ws.escolasis" name="imprimir" qname="operNS:imprimir" soapAction="">
+        <parameter xmlns:pns="http://ws.escolasis" xmlns:tns="http://xml.modelo.escolasis" qname="pns:pessoas" type="tns:ListaPessoaInsert"/>
+      </operation>
+      <operation xmlns:operNS="http://ws.escolasis" xmlns:retNS="http://ws.escolasis" xmlns:rtns="http://xml.modelo.escolasis" name="getListaPapelPessoa" qname="operNS:getListaPapelPessoa" returnQName="retNS:getListaPapelPessoaReturn" returnType="rtns:ListaPapelPessoa" soapAction="">
+      </operation>
+      <parameter name="allowedMethods" value="imprimir getPessoas getListaPapelPessoa salvar getPapelPessoa"/>
+
+      <typeMapping xmlns:ns="http://ws.escolasis" qname="ns:&gt;getPessoas" type="java:escolasis.ws.GetPessoas" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://modelo.escolasis" qname="ns:PapelPessoa" type="java:escolasis.modelo.PapelPessoa" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws.escolasis" qname="ns:&gt;getPapelPessoa" type="java:escolasis.ws.GetPapelPessoa" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://fault.exceptions.escolasis" qname="ns:InfoFault" type="java:escolasis.exceptions.fault.InfoFault" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws.escolasis" qname="ns:&gt;imprimirResponse" type="java:escolasis.ws.ImprimirResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://xml.modelo.escolasis" qname="ns:ListaPessoaInsert" type="java:escolasis.modelo.xml.ListaPessoaInsert" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws.escolasis" qname="ns:&gt;imprimir" type="java:escolasis.ws.Imprimir" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws.escolasis" qname="ns:&gt;getListaPapelPessoa" type="java:escolasis.ws.GetListaPapelPessoa" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://exceptions.escolasis" qname="ns:AutenticacaoException" type="java:escolasis.exceptions.AutenticacaoException" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws.escolasis" qname="ns:&gt;getListaPapelPessoaResponse" type="java:escolasis.ws.GetListaPapelPessoaResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://xml.modelo.escolasis" qname="ns:ListaPapelPessoa" type="java:escolasis.modelo.xml.ListaPapelPessoa" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://ws.escolasis" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://modelo.escolasis" qname="ns:TokenUsuario" type="java:escolasis.modelo.TokenUsuario" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws.escolasis" qname="ns:&gt;salvar" type="java:escolasis.ws.Salvar" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws.escolasis" qname="ns:&gt;getPessoasResponse" type="java:escolasis.ws.GetPessoasResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws.escolasis" qname="ns:&gt;salvarResponse" type="java:escolasis.ws.SalvarResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws.escolasis" qname="ns:&gt;getPapelPessoaResponse" type="java:escolasis.ws.GetPapelPessoaResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://xml.modelo.escolasis" qname="ns:ListaPessoa" type="java:escolasis.modelo.xml.ListaPessoa" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ws.escolasis" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://ws.escolasis" xmlns:intf="http://ws.escolasis" xmlns:tns1="http://xml.modelo.escolasis" xmlns:tns2="http://modelo.escolasis" xmlns:tns3="http://exceptions.escolasis" xmlns:tns4="http://fault.exceptions.escolasis" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://ws.escolasis" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://exceptions.escolasis"/>
+   <import namespace="http://fault.exceptions.escolasis"/>
+   <import namespace="http://xml.modelo.escolasis"/>
+   <import namespace="http://modelo.escolasis"/>
+   <element name="getPessoas">
+    <complexType/>
+   </element>
+   <element name="getPessoasResponse">
+    <complexType>
+     <sequence>
+      <element name="getPessoasReturn" type="tns1:ListaPessoa"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_anyType">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+   <element name="salvar">
+    <complexType>
+     <sequence>
+      <element name="token" type="tns2:TokenUsuario"/>
+      <element name="pessoas" type="tns1:ListaPessoaInsert"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="salvarResponse">
+    <complexType>
+     <sequence>
+      <element name="salvarReturn" type="tns1:ListaPessoaInsert"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="fault" type="tns3:AutenticacaoException"/>
+   <element name="getPapelPessoa">
+    <complexType>
+     <sequence>
+      <element name="idPapelPessoa" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPapelPessoaResponse">
+    <complexType>
+     <sequence>
+      <element name="getPapelPessoaReturn" type="tns2:PapelPessoa"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="imprimir">
+    <complexType>
+     <sequence>
+      <element name="pessoas" type="tns1:ListaPessoaInsert"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="imprimirResponse">
+    <complexType/>
+   </element>
+   <element name="getListaPapelPessoa">
+    <complexType/>
+   </element>
+   <element name="getListaPapelPessoaResponse">
+    <complexType>
+     <sequence>
+      <element name="getListaPapelPessoaReturn" type="tns1:ListaPapelPessoa"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://xml.apache.org/xml-soap" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://ws.escolasis"/>
+   <import namespace="http://exceptions.escolasis"/>
+   <import namespace="http://fault.exceptions.escolasis"/>
+   <import namespace="http://xml.modelo.escolasis"/>
+   <import namespace="http://modelo.escolasis"/>
+   <complexType name="Vector">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://xml.modelo.escolasis" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://ws.escolasis"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://exceptions.escolasis"/>
+   <import namespace="http://fault.exceptions.escolasis"/>
+   <import namespace="http://modelo.escolasis"/>
+   <complexType name="ListaPessoa">
+    <sequence>
+     <element name="pessoas" nillable="true" type="impl:ArrayOf_xsd_anyType"/>
+    </sequence>
+   </complexType>
+   <complexType name="ListaPessoaInsert">
+    <sequence>
+     <element name="pessoas" nillable="true" type="impl:ArrayOf_xsd_anyType"/>
+    </sequence>
+   </complexType>
+   <complexType name="ListaPapelPessoa">
+    <sequence>
+     <element name="papeis" nillable="true" type="impl:ArrayOf_xsd_anyType"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://modelo.escolasis" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://ws.escolasis"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://exceptions.escolasis"/>
+   <import namespace="http://fault.exceptions.escolasis"/>
+   <import namespace="http://xml.modelo.escolasis"/>
+   <complexType name="TokenUsuario">
+    <sequence>
+     <element name="dtValidade" nillable="true" type="xsd:dateTime"/>
+     <element name="token" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="PapelPessoa">
+    <sequence>
+     <element name="dtIns" nillable="true" type="xsd:string"/>
+     <element name="dtUpd" nillable="true" type="xsd:string"/>
+     <element name="idPapelPessoa" nillable="true" type="xsd:long"/>
+     <element name="nomePapelPessoa" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://fault.exceptions.escolasis" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://ws.escolasis"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://exceptions.escolasis"/>
+   <import namespace="http://xml.modelo.escolasis"/>
+   <import namespace="http://modelo.escolasis"/>
+   <complexType name="InfoFault">
+    <sequence/>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://exceptions.escolasis" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://ws.escolasis"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://fault.exceptions.escolasis"/>
+   <import namespace="http://xml.modelo.escolasis"/>
+   <import namespace="http://modelo.escolasis"/>
+   <complexType name="AutenticacaoException">
+    <sequence>
+     <element name="faultInfo" nillable="true" type="tns4:InfoFault"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="salvarRequest">
+
+      <wsdl:part element="impl:salvar" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="salvarResponse">
+
+      <wsdl:part element="impl:salvarResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="AutenticacaoException">
+
+      <wsdl:part element="impl:fault" name="fault">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPapelPessoaResponse">
+
+      <wsdl:part element="impl:getPapelPessoaResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPapelPessoaRequest">
+
+      <wsdl:part element="impl:getPapelPessoa" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="imprimirResponse">
+
+      <wsdl:part element="impl:imprimirResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getListaPapelPessoaRequest">
+
+      <wsdl:part element="impl:getListaPapelPessoa" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPessoasResponse">
+
+      <wsdl:part element="impl:getPessoasResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="imprimirRequest">
+
+      <wsdl:part element="impl:imprimir" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPessoasRequest">
+
+      <wsdl:part element="impl:getPessoas" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getListaPapelPessoaResponse">
+
+      <wsdl:part element="impl:getListaPapelPessoaResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="EscolaSisWS">
+
+      <wsdl:operation name="getPessoas">
+
+         <wsdl:input message="impl:getPessoasRequest" name="getPessoasRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getPessoasResponse" name="getPessoasResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="salvar">
+
+         <wsdl:input message="impl:salvarRequest" name="salvarRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:salvarResponse" name="salvarResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:AutenticacaoException" name="AutenticacaoException">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPapelPessoa">
+
+         <wsdl:input message="impl:getPapelPessoaRequest" name="getPapelPessoaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getPapelPessoaResponse" name="getPapelPessoaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="imprimir">
+
+         <wsdl:input message="impl:imprimirRequest" name="imprimirRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:imprimirResponse" name="imprimirResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getListaPapelPessoa">
+
+         <wsdl:input message="impl:getListaPapelPessoaRequest" name="getListaPapelPessoaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getListaPapelPessoaResponse" name="getListaPapelPessoaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="EscolaSisWSSoapBinding" type="impl:EscolaSisWS">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getPessoas">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPessoasRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPessoasResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="salvar">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="salvarRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="salvarResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="AutenticacaoException">
+
+            <wsdlsoap:fault name="AutenticacaoException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPapelPessoa">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPapelPessoaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPapelPessoaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="imprimir">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="imprimirRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="imprimirResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getListaPapelPessoa">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getListaPapelPessoaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getListaPapelPessoaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="EscolaSisWSService">
+
+      <wsdl:port binding="impl:EscolaSisWSSoapBinding" name="EscolaSisWS">
+
+         <wsdlsoap:address location="http://localhost:8080/escolasis/services/EscolaSisWS"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
