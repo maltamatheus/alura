@@ -1,6 +1,8 @@
 create table tab_pessoa (cpf_pessoa varchar(11), nome_pessoa varchar(100) not null, dt_nascto_pessoa date, id_papel_pessoa bigserial);
 alter table tab_pessoa add constraint tab_pessoa_pk primary key (cpf_pessoa);
 --
+create table tab_teste_git (col1 numeric, col2 varchar(100));
+--
 create table tab_audit_pessoa(cpf_pessoa varchar(11), dt_insert timestamp default current_timestamp, dt_update timestamp default current_timestamp);
 alter table tab_audit_pessoa add constraint tab_audit_pessoa_pk primary key (cpf_pessoa);
 --
